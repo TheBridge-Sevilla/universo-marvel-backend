@@ -6,9 +6,6 @@ module.exports = {
 };
 
 async function getAll() {
-  return await Partidas.find();
+  return await Personajes.find();
 }
-
-
-
 
