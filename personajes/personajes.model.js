@@ -8,7 +8,7 @@ const schema = new Schema({
   modified: Date,
   resourceURI: String,
   urls: [String],
-  thumbnail: Image,
+  thumbnail: String,
   comics: [String],
   stories: [String],
   events: [String],
