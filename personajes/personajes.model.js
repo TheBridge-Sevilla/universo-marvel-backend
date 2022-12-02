@@ -4,15 +4,14 @@ const Schema = mongoose.Schema;
 const schema = new Schema({
   Id: Number,
   name: String,
-  description: String,
-  modified: Date,
+  description: {en: String, es: String},
   resourceURI: String,
-  urls: [String],
-  thumbnail: String,
-  comics: [String],
-  stories: [String],
-  events: [String],
-  series: [String],
+  urls: [Object],
+  thumbnail: Object,
+  comics: Object,
+  stories: Object,
+  events: Object,
+  series: Object,
   });
 
 

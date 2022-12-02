@@ -1,18 +1,13 @@
 const db = require("../_helpers/db");
-//const Personajes = db.Personajes;
+const Personajes = db.Personajes;
 //const ObjectId = require("mongodb").ObjectId;
 var CryptoJS = require("crypto-js"); //Obtener hash de la API de Marvel
-//const deepl = require("deepl-node");
+const deepl = require("deepl-node");
 //var he = require("he");
 
-//const translator = new deepl.Translator(authKey);
-
-
-//const apikey = process.env.MARVEL_KEY_PUBLIC;
-const apikey = "431852960ab20c5c378b14cf2614cddd" //Mias
-
+const translator = new deepl.Translator(process.env.DEEPL_AUTHKEY);
+const apikey = process.env.MARVEL_KEY_PUBLIC;
 const pvtkey = process.env.MARVEL_KEY_PRIVATE;
-//const pvtkey = "094b8592c9a2caf67229c8e22bd492b01d100204" //Mias
 
 var fecha = new Date().getTime();
 const ts = fecha.toString();
@@ -20,53 +15,62 @@ var message = ts + pvtkey + apikey;
 var a = CryptoJS.MD5(message);
 const hash = a.toString();
 
-
-//console.log("ts", ts, "apikey", apikey, "pvtkey", pvtkey, "hash", hash);
-
-const urlAPI = "http://gateway.marvel.com/v1/public/characters?ts="+ts+"&apikey="+apikey+"&hash="+hash
-
-//const urlAPI = "http://gateway.marvel.com/v1/public/comics?&ts="+ts+"&apikey="+apikey+"&hash="+hash
-console.log("urlAPI", urlAPI)
+const urlAPI =
+  "http://gateway.marvel.com/v1/public/characters?limit=10&offset=20&ts=" +
+  ts +
+  "&apikey=" +
+  apikey +
+  "&hash=" +
+  hash;
 
 const fetch = (url) =>
   import("node-fetch").then(({ default: fetch }) => fetch(url));
 
 fetch(urlAPI)
   .then((response) => response.json())
-  .then((data) => console.log(data.data.results))
+  .then((datosPersonajes) => {
+    datosPersonajes.data.results.map((info) => {
+      comprobarPersonaje(info.id).then((duplicada) => {
+        console.log("duplicada", duplicada)
+        if (!duplicada) {
+        let listaPersonajes = {
+          Id: info.id,
+          name: info.name,
+          description: { en: info.description, es: undefined },
+          resourceURI: info.resourceURI,
+          urls: info.urls,
+          thumbnail: info.thumbnail,
+          comics: info.comics,
+          stories: info.stories,
+          events: info.events,
+          series: info.series,
+        };
 
-
-
-  /* 
-    data.trivia_categories.map((categoria) => {
-      let categoriasEditadas = he.decode(categoria.name);
-
-      let CategoriaTransformada = {
-        nombre: { es: undefined, en: categoriasEditadas },
-      };
-      const categoriasTraducidas = translator
-        .translateText(categoriasEditadas, null, "es")
-        .then((res) => {
-          let traduccion = res.text;
-          CategoriaTransformada.nombre.es = traduccion;
-        })
-        .then(() => {
-          comprobarCategoria(CategoriaTransformada.nombre).then((duplicada) => {
-            if (!duplicada) {
-              let CategoriaInsertar = new Categoria(CategoriaTransformada);
-              CategoriaInsertar.save();
-            }
-          });
-        });
-    })
-  )
-  .catch((err) => {
-    console.error(err);
+        if (listaPersonajes.description.en.length !== 0) {
+          translator
+            .translateText(listaPersonajes.description.en, null, "es")
+            .then((result) => {
+              let traduccion = result.text;
+              listaPersonajes.description.es = traduccion;
+               let AñadirPersonajes = new Personajes(listaPersonajes);
+            AñadirPersonajes.save(); 
+              console.log(listaPersonajes);
+            })
+            .catch((error) => {
+              console.error(error);
+            });
+        } else {
+          listaPersonajes.description.es = "Sin descripción";
+           let AñadirPersonajes = new Personajes(listaPersonajes);
+        AñadirPersonajes.save(); 
+        }
+      }
+      })
+    });
   });
 
-async function comprobarCategoria(tituloCategoria) {
-  let categoriaRepetida = await Categoria.find({ nombre: tituloCategoria });
+async function comprobarPersonaje(idAPI) {
+  let comprobarEnMongo = await Personajes.find({ id: idAPI });
   // Si es true la pregunta está repetida
-  return categoriaRepetida.length > 0 ? true : false;
+  return comprobarEnMongo.length > 0 ? true : false;
 }
- */
