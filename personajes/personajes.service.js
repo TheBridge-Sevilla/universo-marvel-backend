@@ -1,6 +1,6 @@
 //Inicialización BaseDatos
-
 const db = require("../_helpers/db");
+const Personajes = db.Personajes
 
 module.exports = {
   getAll,
@@ -9,3 +9,4 @@ module.exports = {
 async function getAll() {
   return await Personajes.find();
 }
+
