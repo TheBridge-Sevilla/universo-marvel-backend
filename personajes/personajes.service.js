@@ -1,14 +1,12 @@
+//Inicialización BaseDatos
 const db = require("../_helpers/db");
-
+const Personajes = db.Personajes
 
 module.exports = {
-  getAll
+  getAll,
 };
 
 async function getAll() {
-  return await Partidas.find();
+  return await Personajes.find();
 }
-
-
-
 

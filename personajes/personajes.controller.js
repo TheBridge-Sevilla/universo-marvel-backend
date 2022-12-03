@@ -1,7 +1,6 @@
 const express = require("express");
-const router = express.Router();
 const personajesService = require("./personajes.service");
-
+const router = express.Router();
 /**
  * @swagger
  * /partidas:
@@ -38,10 +37,13 @@ const personajesService = require("./personajes.service");
  *                         type: date
  *                         description: Fecha en que se jugó la partida.
  *                         example: 2022-10-20T08:33:17.400Z
- *                          
+ *
  */
-router.get("/", getAll);
 
+
+
+//Obtener Personajes y devolver
+router.get("/", getAll);
 
 module.exports = router;
 
@@ -51,5 +53,6 @@ function getAll(req, res, next) {
     .then((personajes) => res.json(personajes))
     .catch((err) => next(err));
 }
-
-
+/* const personajes = {}
+const errores = {}
+getAll(fetch, personajes, errores) */
