@@ -69,7 +69,7 @@ module.exports = router
 
 function getAll(req, res, next) {
   personajesService
-    .getAll()
+    .getAll(req)
     .then((personajes) => res.json(personajes))
     .catch((err) => next(err));
 }

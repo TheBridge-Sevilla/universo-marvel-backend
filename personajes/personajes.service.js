@@ -1,29 +1,33 @@
 //Inicialización BaseDatos
 const db = require("../_helpers/db");
-const Personajes = db.Personajes
+const Personajes = db.Personajes;
 
 module.exports = {
-  getAll
+  getAll,
 };
-/*  const myCustomLabels = {
+const myCustomLabels = {
   totalDocs: "itemCount",
   docs: "itemsList",
   limit: "perPage",
-  page: "currentPage",
-  nextPage: "next",
-  prevPage: "prev",
+  page: "Página",
+  nextPage: "Siguiente",
+  prevPage: "Anterior",
   totalPages: "pageCount",
-  pagingCounter: "slNo",
+  pagingCounter: limit * page,
   meta: "paginator",
-}; */
- 
-const options = {
-  page: 1,
-  limit: 10,
- // customLabels: myCustomLabels,
 };
-async function getAll() {
-  return await Personajes.find().paginate({}, options).then(function (result) {
-    // ...
-  });
+
+async function getAll(req) {
+  const options = {
+    page: 1,
+    offset: req.query.offset,
+    limit: req.query.limit,
+    customLabels: myCustomLabels,
+  };
+
+  return await Personajes.find()
+    .paginate({}, { limit: options })
+    .then(function (result) {
+      return result;
+    });
 }
