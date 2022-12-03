@@ -45,7 +45,27 @@ const router = express.Router();
 //Obtener Personajes y devolver
 router.get("/", getAll);
 
-module.exports = router;
+const myCustomLabels = {
+  totalDocs: 'itemCount',
+  docs: 'itemsList',
+  limit: 'perPage',
+  page: 'currentPage',
+  nextPage: 'next',
+  prevPage: 'prev',
+  totalPages: 'pageCount',
+  pagingCounter: 'slNo',
+  meta: 'paginator',
+};
+
+const options = {
+  page: 1,
+  limit: 10,
+  customLabels: myCustomLabels,
+  collation: {
+    locale: 'es',
+  },
+};
+module.exports = router
 
 function getAll(req, res, next) {
   personajesService

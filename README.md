@@ -18,3 +18,7 @@ fetch (https://www.npmjs.com/package/node-fetch)
 deepl (https://www.npmjs.com/package/deepl-node)
 
 > npm install deepl-node
+
+Paginaciones (https://www.npmjs.com/package/mongoose-paginate-v2)
+
+> npm install mongoose-paginate-v2
