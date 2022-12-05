@@ -15,9 +15,7 @@ const schema = new Schema({
   series: Object,
 });
 
-
 schema.plugin(mongoosePaginate);
 
 module.exports = mongoose.model("Personaje", schema);
 
-//https://www.npmjs.com/package/mongoose-paginate-v2

@@ -1,6 +1,7 @@
 const express = require("express");
 const personajesService = require("./personajes.service");
 const router = express.Router();
+
 /**
  * @swagger
  * /partidas:
@@ -39,32 +40,8 @@ const router = express.Router();
  *                         example: 2022-10-20T08:33:17.400Z
  *
  */
-
-
-
-//Obtener Personajes y devolver
 router.get("/", getAll);
 
-const myCustomLabels = {
-  totalDocs: 'itemCount',
-  docs: 'itemsList',
-  limit: 'perPage',
-  page: 'currentPage',
-  nextPage: 'next',
-  prevPage: 'prev',
-  totalPages: 'pageCount',
-  pagingCounter: 'slNo',
-  meta: 'paginator',
-};
-
-const options = {
-  page: 1,
-  limit: 10,
-  customLabels: myCustomLabels,
-  collation: {
-    locale: 'es',
-  },
-};
 module.exports = router
 
 function getAll(req, res, next) {
@@ -73,6 +50,3 @@ function getAll(req, res, next) {
     .then((personajes) => res.json(personajes))
     .catch((err) => next(err));
 }
-/* const personajes = {}
-const errores = {}
-getAll(fetch, personajes, errores) */
