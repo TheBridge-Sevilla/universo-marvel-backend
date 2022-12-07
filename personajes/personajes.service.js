@@ -7,6 +7,9 @@ module.exports = {
 };
 
 async function getAll(req) {
-  const { offset,limit } = req.query
-  return await Personajes.paginate({}, { offset: offset, limit: limit }).then(function (result) { return result });
+  const limit = parseInt(req.query.limit, 10) || 10;
+  const page = parseInt(req.query.page, 10) || 10
+  console.log(req)
+  const paginacionPersonajes = await Personajes.paginate({}, { limit, page })
+  return paginacionPersonajes
 }
