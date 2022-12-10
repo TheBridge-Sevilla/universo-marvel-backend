@@ -1,6 +1,7 @@
 const express = require("express");
 const personajesService = require("./personajes.service");
 const router = express.Router();
+
 /**
  * @swagger
  * /partidas:
@@ -39,20 +40,13 @@ const router = express.Router();
  *                         example: 2022-10-20T08:33:17.400Z
  *
  */
-
-
-
-//Obtener Personajes y devolver
 router.get("/", getAll);
 
-module.exports = router;
+module.exports = router
 
 function getAll(req, res, next) {
   personajesService
-    .getAll()
+    .getAll(req)
     .then((personajes) => res.json(personajes))
     .catch((err) => next(err));
 }
-/* const personajes = {}
-const errores = {}
-getAll(fetch, personajes, errores) */
