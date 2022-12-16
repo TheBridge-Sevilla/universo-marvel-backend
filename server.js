@@ -6,7 +6,6 @@ require('dotenv').config()
 
 const app = express();
 
-//Swagger configuration: https://dev.to/kabartolo/how-to-document-an-express-api-with-swagger-ui-and-jsdoc-50do
 const swaggerJSDoc = require('swagger-jsdoc');
 const swaggerUi = require('swagger-ui-express');
 
