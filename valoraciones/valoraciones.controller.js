@@ -42,19 +42,21 @@ const router = express.Router();
 
 
 
-//Obtener Personajes y devolver
-router.get("/", getAll);
+router.get("/", get);
 router.post("/", create);
 module.exports = router;
 
-function getAll(req, res, next) {
+function get(req, res, next) {
   valoracionesService
-    .getAll()
+    .get(req)
     .then((valoraciones) => res.json(valoraciones))
     .catch((err) => next(err));
 }
 
 
 function create(req, res, next) {
-  console.log(req.body);
+  valoracionesService
+  .create(req)
+  .then((valoraciones) => res.json(valoraciones))
+  .catch((err) => next(err));
 }

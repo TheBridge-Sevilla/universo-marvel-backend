@@ -1,6 +1,8 @@
 //Inicialización BaseDatos
 const db = require("../_helpers/db");
 const Personajes = db.Personajes;
+const Valoraciones = db.Valoraciones;
+const ObjectId = require("mongodb").ObjectId;
 
 module.exports = {
   getAll,
@@ -14,5 +16,21 @@ async function getAll(req) {
     { name: { $regex: filter, $options: "i" } },
     { limit, page }
   );
-  return paginacionPersonajes;
+
+  let valoraciones = [];
+  for (let personaje of paginacionPersonajes.docs) {
+    valoracionesPersonaje = await Valoraciones.find({
+      personaje: ObjectId(personaje._id),
+    });
+
+    valoracionMedia =
+      valoracionesPersonaje.reduce(
+        (accumulator, currentValue) => accumulator + currentValue.valoracion,
+        0
+      ) / valoracionesPersonaje.length;
+
+    valoraciones.push(valoracionMedia);
+  }
+
+  return {personajes:paginacionPersonajes, valoraciones: valoraciones};
 }
