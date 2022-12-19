@@ -2,6 +2,8 @@
 const db = require("../_helpers/db");
 const Valoracion = db.Valoraciones;
 const Personaje = db.Personajes;
+const ObjectId = require("mongodb").ObjectId;
+
 
 module.exports = {
   get,
@@ -9,11 +11,11 @@ module.exports = {
 };
 
 async function get(req) {
+  console.log(req.query)
   let valoracion = await Valoracion.findOne({
-    idPersonaje: req.query.idPersonaje,
+    personaje: ObjectId(req.query.idPersonaje),
     idUsuario: req.query.idUsuario,
   });
-  console.log(valoracion)
   if (valoracion) {
     return valoracion.valoracion;
   } else {
