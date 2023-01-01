@@ -44,6 +44,9 @@ const router = express.Router();
 
 router.get("/", get);
 router.post("/", create);
+router.get("/destacado", mejorValorado);
+router.post("/favoritos", favoritos);
+
 module.exports = router;
 
 function get(req, res, next) {
@@ -54,9 +57,23 @@ function get(req, res, next) {
 }
 
 
-function create(req, res, next) {
+ function create(req, res, next) {
   valoracionesService
   .create(req)
+  .then((valoraciones) => res.json(valoraciones))
+  .catch((err) => next(err));
+}
+ 
+function favoritos(req, res, next) {
+  valoracionesService
+  .favoritos(req)
+  .then((valoraciones) => res.json(valoraciones))
+  .catch((err) => next(err));
+}
+
+function mejorValorado(req, res, next) {
+  valoracionesService
+  .mejorValorado(req)
   .then((valoraciones) => res.json(valoraciones))
   .catch((err) => next(err));
 }

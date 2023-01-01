@@ -8,6 +8,8 @@ const ObjectId = require("mongodb").ObjectId;
 module.exports = {
   get,
   create,
+  favoritos,
+  mejorValorado,
 };
 
 async function get(req) {
@@ -23,7 +25,7 @@ async function get(req) {
   }
 }
 
-async function create(req) {
+ async function create(req) {
   let personaje = await Personaje.findOne({ name: req.query.personaje });
 
   let valoracion = await Valoracion.findOne({
@@ -43,4 +45,13 @@ async function create(req) {
   }
   console.log(valoracion)
   return valoracion;
+} 
+
+async function mejorValorado() {
+  const valoraciones = await Valoracion.find().populate('valoracion').sort({valoracion: -1}).limit(5);
+  return valoraciones
+}
+async function favoritos(req) {
+  const miPersonaje = await Valoracion.find({idUsuario: req.body.idUsuario}).populate('valoracion').sort({valoracion: -1}).limit(5);
+  return miPersonaje
 }
