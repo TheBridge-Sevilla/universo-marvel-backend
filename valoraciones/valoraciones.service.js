@@ -63,7 +63,6 @@ async function mejorValorado() {
     };
     respuesta.push(datos);
   }
-console.log(respuesta)
   return respuesta;
 }
 
@@ -72,6 +71,16 @@ async function favoritos(req) {
     .populate("valoracion")
     .sort({ valoracion: -1 })
     .limit(5);
-  console.log("miPersonaje", miPersonaje);
-  return miPersonaje;
+    let respuesta = [];
+    for (let i = 0; i < miPersonaje.length; i++) {
+      let id = Object(miPersonaje[i].personaje);
+      let personaje = await Personaje.findById({ _id: id });
+      let datos = {
+        valoracion: miPersonaje[i].valoracion,
+        personaje: personaje.name,
+        imagen: personaje.thumbnail.path + "." + personaje.thumbnail.extension,
+      };
+      respuesta.push(datos);
+    }
+  return respuesta;
 }
