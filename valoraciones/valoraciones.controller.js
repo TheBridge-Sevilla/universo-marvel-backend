@@ -3,9 +3,9 @@ const valoracionesService = require("./valoraciones.service");
 const router = express.Router();
 /**
  * @swagger
- * /partidas:
+ * /valoraciones/destacado:
  *   get:
- *     summary: Devuelve una lista de partidas.
+ *     summary: Devuelve una lista con los 5 personajes más valorados.
  *     description: Retrieve a list of users from JSONPlaceholder. Can be used to populate a list of fake users when prototyping or testing an API.
  *     responses:
  *       200:
@@ -17,26 +17,18 @@ const router = express.Router();
  *               items:
  *                  type: object
  *                  properties:
- *                       _id:
- *                         type: string
- *                         description: El ID de la partida.
- *                         example: 635102dd9ef0f77c5801cfb4
- *                       nombre:
- *                         type: string
- *                         description: El nombre del usuario.
- *                         example: Kenny Miller
- *                       categoria:
- *                         type: string
- *                         description: El ID de la categoría a la que hace referencia.
- *                         example: 634ef53d64362d730580cd9c (Deportes)
- *                       puntuacion:
+ *                       valoracion:
  *                         type: integer
- *                         description: La puntuación alcanzada por el usuario.
- *                         example: 10
- *                       fecha:
- *                         type: date
- *                         description: Fecha en que se jugó la partida.
- *                         example: 2022-10-20T08:33:17.400Z
+ *                         description: Valoración media obtenida  por los usuarios.
+ *                         example: 5
+ *                       personaje:
+ *                         type: string
+ *                         description: Nombre del personaje.
+ *                         example: "Wolverine"
+ *                       imagen:
+ *                         type: string
+ *                         description: url con la imagen del personaje.
+ *                         example: "http://i.annihil.us/u/prod/marvel/i/mg/2/60/537bcaef0f6cf.jpg"
  *
  */
 

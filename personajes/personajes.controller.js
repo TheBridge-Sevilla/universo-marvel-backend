@@ -4,10 +4,10 @@ const router = express.Router();
 
 /**
  * @swagger
- * /partidas:
+ * /personajes/:
  *   get:
- *     summary: Devuelve una lista de partidas.
- *     description: Retrieve a list of users from JSONPlaceholder. Can be used to populate a list of fake users when prototyping or testing an API.
+ *     summary: Devuelve una lista con los personajes del universo Marvel.
+ *     description: Retrieve a list of users from JSON Placeholder. Can be used to populate a list of fake users when prototyping or testing an API.
  *     responses:
  *       200:
  *         description: A list of users.
@@ -18,27 +18,46 @@ const router = express.Router();
  *               items:
  *                  type: object
  *                  properties:
- *                       _id:
+ *                       Id:
  *                         type: string
- *                         description: El ID de la partida.
+ *                         description: ID personaje.
  *                         example: 635102dd9ef0f77c5801cfb4
- *                       nombre:
+ *                       name:
  *                         type: string
- *                         description: El nombre del usuario.
- *                         example: Kenny Miller
- *                       categoria:
+ *                         description: Nombre del personaje.
+ *                         example: Spiderman
+ *                       description:
+ *                         type: object
+ *                         description: Descripción del personaje.
+ *                         example: Spiderman adquire los poderes al ser picado por una araña
+ *                       resourceURI:
  *                         type: string
- *                         description: El ID de la categoría a la que hace referencia.
- *                         example: 634ef53d64362d730580cd9c (Deportes)
- *                       puntuacion:
- *                         type: integer
  *                         description: La puntuación alcanzada por el usuario.
  *                         example: 10
- *                       fecha:
- *                         type: date
+ *                       urls:
+ *                         type: object
  *                         description: Fecha en que se jugó la partida.
  *                         example: 2022-10-20T08:33:17.400Z
- *
+ *                       thumbnail:
+ *                         type: object
+ *                         description: Imagenes del personaje.
+ *                         example: 2022-10-20T08:33:17.400Z
+ *                       comics:
+ *                         type: object
+ *                         description: Fecha en que se jugó la partida.
+ *                         example: 2022-10-20T08:33:17.400Z
+ *                       stories:
+ *                         type: object
+ *                         description: Fecha en que se jugó la partida.
+ *                         example: 2022-10-20T08:33:17.400Z
+ *                       events:
+ *                         type: object
+ *                         description: Fecha en que se jugó la partida.
+ *                         example: 2022-10-20T08:33:17.400Z
+ *                       series:
+ *                         type: object
+ *                         description: Fecha en que se jugó la partida.
+ *                         example: 2022-10-20T08:33:17.400Z
  */
 router.get("/", getAll);
 
