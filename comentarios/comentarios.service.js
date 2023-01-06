@@ -19,13 +19,10 @@ async function get(req) {
 
 async function create(req) {
     console.log(req.query)
-    let personaje = Personaje.findOne({
-        personaje: req.body.idPersonaje
-    })
     let comentario = Comentario.create({
         idUsuario: req.body.idUsuario,
         comentario: req.body.comentario,
-        personaje: personaje._id,
+        personaje: await Personaje.findOne({ name: req.query.personaje }),
     })
     return comentario
 }
