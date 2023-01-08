@@ -10,7 +10,6 @@ module.exports = {
 };
 
 async function get(req) {
-    console.log(req.query);
     let comentarios = await Comentario.find({
         personaje: ObjectId(req.body.personaje)
     });
@@ -18,8 +17,6 @@ async function get(req) {
 }
 
 async function create(req) {
-    console.log(req.body)
-    
     let comentario = Comentario.create(req.body)
     return comentario
 }
