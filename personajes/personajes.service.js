@@ -9,7 +9,7 @@ module.exports = {
 };
 
 async function getAll(req) {
-  const limit = parseInt(req.query.limit, 10) || 10;
+  const limit = parseInt(req.query.limit, 28) || 28;
   const page = parseInt(req.query.page, 10) || 10;
   const filter = req.query.filter != "undefined" ? req.query.filter : "";
   const paginacionPersonajes = await Personajes.paginate(
