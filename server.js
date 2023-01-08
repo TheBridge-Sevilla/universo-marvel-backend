@@ -42,6 +42,8 @@ app.use('/personajes', require('./personajes/personajes.controller'));
 
 app.use('/valoraciones', require('./valoraciones/valoraciones.controller'));
 
+app.use('/comentarios', require('./comentarios/comentarios.controller'));
+
 // set port, listen for requests
 const port = process.env.NODE_ENV === 'DEV' ? (process.env.PORT || 80) : 4000;
 const server = app.listen(port, function () {

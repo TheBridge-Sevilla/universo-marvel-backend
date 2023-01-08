@@ -1,6 +1,9 @@
+const express = require("express");
+const comentariosService = require("./comentarios.service");
+const router = express.Router();
+
 router.get("/", get);
 router.post("/", create);
-router.post("/comentario", comentarios);
 
 module.exports = router;
 
@@ -18,9 +21,9 @@ function create(req, res, next) {
         .catch((err) => next(err));
 }
 
-function masComentado(req, res, next) {
+/*  function comentarPersonaje(req, res, next) {
     comentariosService
-        .masComentado(req)
+        .comentarPersonaje(req)
         .then((comentarios) => res.json(comentarios))
         .catch((err) => next(err));
-}
+}  */
