@@ -20,7 +20,7 @@ const swaggerDefinition = {
 const options = {
   swaggerDefinition,
   // Paths to files containing OpenAPI definitions
-  apis: ['./personajes/*.js'],
+  apis: ['./personajes/*.js', './valoraciones/*.js'],
 };
 
 
