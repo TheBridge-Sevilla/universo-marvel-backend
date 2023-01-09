@@ -6,6 +6,8 @@ const router = express.Router();
  * @swagger
  * /personajes/:
  *   get:
+ *     tags:
+ *     - personajes
  *     summary: Devuelve una lista con los personajes del universo Marvel.
  *     description: Retrieve a list of users from JSON Placeholder. Can be used to populate a list of fake users when prototyping or testing an API.
  *     responses:

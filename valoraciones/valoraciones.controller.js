@@ -5,6 +5,8 @@ const router = express.Router();
  * @swagger
  * /valoraciones/destacado:
  *   get:
+ *     tags:
+ *     - valoraciones
  *     summary: Devuelve una lista con los 5 personajes más valorados.
  *     description: Retrieve a list of users from JSONPlaceholder. Can be used to populate a list of fake users when prototyping or testing an API.
  *     responses:
@@ -31,8 +33,49 @@ const router = express.Router();
  *                         example: "http://i.annihil.us/u/prod/marvel/i/mg/2/60/537bcaef0f6cf.jpg"
  *
  */
-
-
+/**
+ * @swagger
+ * /valoraciones/favoritos:
+ *   post:
+ *     tags:
+ *     - valoraciones
+ *     summary: Devuelve una lista con los 5 personajes más valorados.
+ *     operationId: usuarioId
+ *     requestBody:
+ *       description: A list of users.
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               idUsuario: 
+ *                 type: string
+ *                 description: ID del usuario registrado
+ *                 example: y6dtb1y23oMn00AAFcgjdhSbbhi2
+ *       required: true
+ *     responses:
+ *       200:
+ *         description: Successful operation
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 type: object
+ *                 properties:
+ *                   valoracion:
+ *                     type: integer
+ *                     description: Valoración media obtenida  por los usuarios.
+ *                     example: 5
+ *                   personaje:
+ *                     type: string
+ *                     description: El nombre del personaje.
+ *                     example: "Wolverine"
+ *                   imagen:
+ *                     type: string
+ *                     description: url con la imagen del personaje.
+ *                     example: "http://i.annihil.us/u/prod/marvel/i/mg/2/60/537bcaef0f6cf.jpg"
+ */
 
 router.get("/", get);
 router.post("/", create);
