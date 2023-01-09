@@ -20,10 +20,3 @@ function create(req, res, next) {
         .then((comentarios) => res.json(comentarios))
         .catch((err) => next(err));
 }
-
-/*  function comentarPersonaje(req, res, next) {
-    comentariosService
-        .comentarPersonaje(req)
-        .then((comentarios) => res.json(comentarios))
-        .catch((err) => next(err));
-}  */

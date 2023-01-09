@@ -5,7 +5,7 @@ const schema = new Schema({
   idUsuario: String,
   personaje: { type: Schema.ObjectId, ref: "Personaje" },
   valoracion: Number,
-  });
+});
 
 
 

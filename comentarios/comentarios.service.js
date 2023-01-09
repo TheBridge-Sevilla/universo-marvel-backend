@@ -10,9 +10,8 @@ module.exports = {
 };
 
 async function get(req) {
-    let comentarios = await Comentario.find({
-        personaje: ObjectId(req.body.personaje)
-    });
+    console.log(req.query)
+    let comentarios = await Comentario.find({ personaje: req.query.personaje });
     return comentarios
 }
 
