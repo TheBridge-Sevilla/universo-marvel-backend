@@ -11,7 +11,7 @@ module.exports = {
 
 async function get(req) {
     console.log(req.query)
-    let comentarios = await Comentario.find({ personaje: req.query.personaje });
+    let comentarios = await Comentario.find({ personaje: req.query.personaje }).sort({"fecha": -1});
     return comentarios
 }
 
